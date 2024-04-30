@@ -1,0 +1,3 @@
+C:/Users/Diego Santos/Desktop/POO/Practica4-master/Practica4-master/cmake-build-debug/CMakeFiles/rpg.dir
+C:/Users/Diego Santos/Desktop/POO/Practica4-master/Practica4-master/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Diego Santos/Desktop/POO/Practica4-master/Practica4-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir
