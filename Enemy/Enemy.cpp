@@ -35,11 +35,11 @@ void Enemy::takeDamage(int damage) {
     }
     health -= trueDamage;
 
-    std::cout << name << " took " << trueDamage << " damage!" << endl;
+    std::cout << name << " recibio " << trueDamage << " de dano!" << endl;
 
 
     if (health <= 0) {
-        cout << name << " has been defeated!" << endl;
+        cout << name << " ha sido derrotado" << endl;
 
 
     }

@@ -77,7 +77,7 @@ void Combat::doCombat() {
     int round = 1;
     //Este while representa las rondas del combate
     while (enemies.size() > 0 && partyMembers.size() > 0) {
-        cout << "Round " << round << endl;
+        cout << "Ronda " << round << endl;
         vector<Character *>::iterator it = participants.begin();
         registerActions(it);
         executeActions(it);
@@ -86,9 +86,9 @@ void Combat::doCombat() {
     }
 
     if (enemies.empty()) {
-        cout << "You win!" << endl;
+        cout << "Ganaste!" << endl;
     } else {
-        cout << "You lose!" << endl;
+        cout << "Perdiste!" << endl;
 
     }
 }
@@ -101,7 +101,7 @@ void Combat::executeActions(vector<Character *>::iterator participant) {
 
         //Check if there are any dead characters
         checkParticipantStatus(*participant);
-        //checkParticipantStatus(currentAction.target);
+        checkParticipantStatus(currentAction.target);
     }
 }
 

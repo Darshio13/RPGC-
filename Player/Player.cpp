@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Player::Player(char _name[], int _health, int _attack, int _defense, int _speed) : Character(_name, _health, _attack,
+Player::Player(const char _name[], int _health, int _attack, int _defense, int _speed) : Character(_name, _health, _attack,
                                                                                              _defense, _speed, true) {
     level = 1;
     experience = 0;
@@ -25,11 +25,11 @@ void Player::takeDamage(int damage) {
     }
     health -= trueDamage;
 
-    std::cout << name << " took " << trueDamage << " damage!" << endl;
+    std::cout << name << " recibio " << trueDamage << " de dano!" << endl;
 
 
     if (health <= 0) {
-        cout << name << " has been defeated!" << endl;
+        cout << name << " fue derrotado!" << endl;
     }
 }
 
@@ -134,4 +134,70 @@ Action Player::takeAction(vector<Enemy *> enemies) {
         }
     } while (error);
     return currentAction;
+}
+
+Player *Player::unserialize(char *buffer) {
+    char *iterator = buffer;
+    int level, experience;
+    char name[40];
+    int health, attack, defense, speed;
+
+    memcpy(&level, iterator, sizeof(level));
+    iterator += sizeof(level);
+
+    memcpy(&experience, iterator, sizeof(experience));
+    iterator += sizeof(experience);
+
+    memcpy(name, iterator, sizeof(name));
+    iterator += sizeof(name);
+
+    memcpy(&health, iterator, sizeof(health));
+    iterator += sizeof(health);
+
+    memcpy(&attack, iterator, sizeof(attack));
+    iterator += sizeof(attack);
+
+    memcpy(&defense, iterator, sizeof(defense));
+    iterator += sizeof(defense);
+
+    memcpy(&speed, iterator, sizeof(speed));
+
+    return new Player(level, experience, name, health, attack, defense, speed);
+}
+
+void Player::serialize(char buffer[]) {
+    char *iterator = buffer;
+
+    memcpy(iterator, &level, sizeof(level));
+    iterator += sizeof(level);
+
+    memcpy(iterator, &experience, sizeof(experience));
+    iterator += sizeof(experience);
+
+    memcpy(iterator, name, sizeof(name));
+    iterator += sizeof(name);
+
+    memcpy(iterator, &health, sizeof(health));
+    iterator += sizeof(health);
+
+    memcpy(iterator, &attack, sizeof(attack));
+    iterator += sizeof(attack);
+
+    memcpy(iterator, &defense, sizeof(defense));
+    iterator += sizeof(defense);
+
+    memcpy(iterator, &speed, sizeof(speed));
+}
+
+Player::Player(int _level, int _experience, char *_name, int _health, int _attack, int _defense, int _speed)
+        : Character(_name, _health,
+                    _attack,
+                    _defense, _speed,
+                    true) {
+    level = _level;
+    experience = _experience;
+}
+
+string Player::toString() {
+    return Character::toString() + "\nLevel: " + to_string(level) + "\nExp: " + to_string(experience);
 }

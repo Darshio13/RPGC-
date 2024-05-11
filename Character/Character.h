@@ -4,7 +4,9 @@
 
 #ifndef RPG_CHARACTER_H
 #define RPG_CHARACTER_H
+
 #include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -16,27 +18,33 @@ protected:
     int defense;
     int speed;
     bool isPlayer;
-    bool isDefending=false;
+    bool isDefending = false;
 public:
-    Character(char _name[], int _health, int _attack, int _defense, int _speed, bool _isPlayer);
+    Character(const char _name[], int _health, int _attack, int _defense, int _speed, bool _isPlayer);
 
     virtual void doAttack(Character *target) = 0;
+
     virtual void takeDamage(int damage) = 0;
 
     //TODO: Implementar metodo de defensa
     //Incrementar la defensa un 20% solo por el turno actual
     void defend(bool state);
-    void levelUp();
-    bool flee(Character* target);
+
+    bool flee(Character *target);
+
     string getName();
+
     int getHealth();
+
     int getAttack();
+
     int getDefense();
+
     bool getIsPlayer();
+
     int getSpeed();
-    string toString();
 
-
+    virtual string toString();
 };
 
 
